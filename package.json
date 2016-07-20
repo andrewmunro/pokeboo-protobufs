@@ -11,10 +11,11 @@
     "build": "node scripts/generateProtobufs",
     "prepublish": "npm run build"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "git-clone": "^0.1.0",
+  "dependencies": {
     "protobufjs": "^5.0.1"
+  },
+  "devDependencies": {
+    "git-clone": "^0.1.0"
   },
   "optionalDependencies": {}
 }
