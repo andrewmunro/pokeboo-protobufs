@@ -1,12 +1,12 @@
 {
   "name": "pokeboo-protobuf",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:andrewmunro/pokeboo-protobufs.git"
   },
   "license": "UNLICENSED",
-  "main": "./distribution/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "node scripts/generateProtobufs",
     "prepublish": "npm run build"
