@@ -111,13 +111,13 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                         },
                         {
                             "rule": "optional",
-                            "type": "int32",
+                            "type": "double",
                             "name": "eggKmWalkedTarget",
                             "id": 11
                         },
                         {
                             "rule": "optional",
-                            "type": "int32",
+                            "type": "double",
                             "name": "eggKmWalkedStart",
                             "id": 12
                         },
@@ -159,7 +159,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                         },
                         {
                             "rule": "optional",
-                            "type": "int32",
+                            "type": "float",
                             "name": "cpMultiplier",
                             "id": 20
                         },
@@ -189,7 +189,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                         },
                         {
                             "rule": "optional",
-                            "type": "int32",
+                            "type": "string",
                             "name": "eggIncubatorId",
                             "id": 25
                         },
@@ -371,8 +371,8 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                     "fields": [
                         {
                             "rule": "optional",
-                            "type": "int32",
-                            "name": "pokedexEntryNumber",
+                            "type": "Enums.PokemonId",
+                            "name": "pokemonId",
                             "id": 1
                         },
                         {
@@ -3640,8 +3640,8 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                 },
                                 {
                                     "rule": "optional",
-                                    "type": "double",
-                                    "name": "unknown2",
+                                    "type": "fixed64",
+                                    "name": "encounterId",
                                     "id": 2
                                 },
                                 {
@@ -3915,7 +3915,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                 {
                                     "rule": "optional",
                                     "type": "string",
-                                    "name": "spawnpointId",
+                                    "name": "spawnPointId",
                                     "id": 5
                                 },
                                 {
@@ -3938,7 +3938,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                 {
                                     "rule": "optional",
                                     "type": "string",
-                                    "name": "spawnpointId",
+                                    "name": "spawnPointId",
                                     "id": 1
                                 },
                                 {
@@ -4091,7 +4091,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                     "name": "EggIncubators",
                     "fields": [
                         {
-                            "rule": "optional",
+                            "rule": "repeated",
                             "type": "EggIncubator",
                             "name": "eggIncubator",
                             "id": 1
@@ -4681,6 +4681,36 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                             ]
                         },
                         {
+                            "name": "Unknown6Response",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "int32",
+                                    "name": "unknown1",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "Unknown2",
+                                    "name": "unknown2",
+                                    "id": 2
+                                }
+                            ],
+                            "messages": [
+                                {
+                                    "name": "Unknown2",
+                                    "fields": [
+                                        {
+                                            "rule": "optional",
+                                            "type": "uint64",
+                                            "name": "unknown1",
+                                            "id": 1
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
                             "name": "ResponseEnvelope",
                             "fields": [
                                 {
@@ -4703,7 +4733,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                 },
                                 {
                                     "rule": "optional",
-                                    "type": "Unknown6",
+                                    "type": "Unknown6Response",
                                     "name": "unknown6",
                                     "id": 6
                                 },
@@ -4935,7 +4965,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "fixed64",
+                                            "type": "uint64",
                                             "name": "encounterId",
                                             "id": 1
                                         },
@@ -5025,7 +5055,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                         {
                                             "rule": "optional",
                                             "type": "string",
-                                            "name": "spawnpointId",
+                                            "name": "spawnPointId",
                                             "id": 2
                                         },
                                         {
