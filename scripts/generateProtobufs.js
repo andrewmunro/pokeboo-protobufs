@@ -1,4 +1,5 @@
 var clone = require('git-clone');
+var del = require('del');
 
 clone('git@github.com:AeonLucid/POGOProtos.git', 'build', function() {
     var spawn = require('child_process').spawn;
@@ -17,4 +18,8 @@ clone('git@github.com:AeonLucid/POGOProtos.git', 'build', function() {
     proc.on('error', function(error) {
         console.log(error);
     });
+
+    proc.on('close', function(status) {
+        del.sync(['build']);
+    })
 });

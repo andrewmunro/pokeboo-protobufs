@@ -93,7 +93,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                         },
                         {
                             "rule": "optional",
-                            "type": "int32",
+                            "type": "string",
                             "name": "deployedFortId",
                             "id": 8
                         },
@@ -165,7 +165,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                         },
                         {
                             "rule": "optional",
-                            "type": "int32",
+                            "type": "Inventory.Item.ItemId",
                             "name": "pokeball",
                             "id": 21
                         },
@@ -207,7 +207,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                         },
                         {
                             "rule": "optional",
-                            "type": "int32",
+                            "type": "float",
                             "name": "additionalCpMultiplier",
                             "id": 28
                         },
@@ -312,7 +312,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                         },
                         {
                             "rule": "optional",
-                            "type": "int32",
+                            "type": "Enums.TeamColor",
                             "name": "team",
                             "id": 5
                         },
@@ -320,7 +320,10 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                             "rule": "repeated",
                             "type": "Enums.TutorialState",
                             "name": "tutorialState",
-                            "id": 7
+                            "id": 7,
+                            "options": {
+                                "packed": true
+                            }
                         },
                         {
                             "rule": "optional",
@@ -1116,7 +1119,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                             "fields": [
                                 {
                                     "rule": "repeated",
-                                    "type": "Inventory.ItemId",
+                                    "type": "Inventory.Item.ItemId",
                                     "name": "pokeballType",
                                     "id": 1
                                 },
@@ -1133,6 +1136,141 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "id": 12
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Logs",
+                    "fields": [],
+                    "messages": [
+                        {
+                            "name": "CatchPokemonLogEntry",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "Result",
+                                    "name": "result",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "Enums.PokemonId",
+                                    "name": "pokemonId",
+                                    "id": 2
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "int32",
+                                    "name": "combatPoints",
+                                    "id": 3
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "uint64",
+                                    "name": "pokemonDataId",
+                                    "id": 4
+                                }
+                            ],
+                            "enums": [
+                                {
+                                    "name": "Result",
+                                    "values": [
+                                        {
+                                            "name": "UNSET",
+                                            "id": 0
+                                        },
+                                        {
+                                            "name": "POKEMON_CAPTURED",
+                                            "id": 1
+                                        },
+                                        {
+                                            "name": "POKEMON_FLED",
+                                            "id": 2
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "FortSearchLogEntry",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "Result",
+                                    "name": "result",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "fortId",
+                                    "id": 2
+                                },
+                                {
+                                    "rule": "repeated",
+                                    "type": "Inventory.Item.ItemData",
+                                    "name": "items",
+                                    "id": 3
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "int32",
+                                    "name": "eggs",
+                                    "id": 4
+                                }
+                            ],
+                            "enums": [
+                                {
+                                    "name": "Result",
+                                    "values": [
+                                        {
+                                            "name": "UNSET",
+                                            "id": 0
+                                        },
+                                        {
+                                            "name": "SUCCESS",
+                                            "id": 1
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "ActionLogEntry",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "int64",
+                                    "name": "timestampMs",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "bool",
+                                    "name": "sfida",
+                                    "id": 2
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "CatchPokemonLogEntry",
+                                    "name": "catchPokemon",
+                                    "id": 3,
+                                    "oneof": "Action"
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "FortSearchLogEntry",
+                                    "name": "fortSearch",
+                                    "id": 4,
+                                    "oneof": "Action"
+                                }
+                            ],
+                            "oneofs": {
+                                "Action": [
+                                    3,
+                                    4
+                                ]
+                            }
                         }
                     ]
                 }
@@ -3072,23 +3210,6 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                     ]
                 },
                 {
-                    "name": "PokemonClass",
-                    "values": [
-                        {
-                            "name": "NORMAL",
-                            "id": 0
-                        },
-                        {
-                            "name": "LEGENDARY",
-                            "id": 1
-                        },
-                        {
-                            "name": "MYTHIC",
-                            "id": 2
-                        }
-                    ]
-                },
-                {
                     "name": "PokemonFamilyId",
                     "values": [
                         {
@@ -3451,6 +3572,23 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                     ]
                 },
                 {
+                    "name": "PokemonRarity",
+                    "values": [
+                        {
+                            "name": "NORMAL",
+                            "id": 0
+                        },
+                        {
+                            "name": "LEGENDARY",
+                            "id": 1
+                        },
+                        {
+                            "name": "MYTHIC",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
                     "name": "PokemonType",
                     "values": [
                         {
@@ -3764,7 +3902,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                             "fields": [
                                 {
                                     "rule": "optional",
-                                    "type": "Inventory.ItemId",
+                                    "type": "Inventory.Item.ItemId",
                                     "name": "itemId",
                                     "id": 1
                                 },
@@ -3787,25 +3925,25 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                             "fields": [
                                 {
                                     "rule": "optional",
-                                    "type": "int32",
+                                    "type": "string",
                                     "name": "fortSummaryId",
                                     "id": 1
                                 },
                                 {
                                     "rule": "optional",
-                                    "type": "int32",
+                                    "type": "int64",
                                     "name": "lastModifiedTimestampMs",
                                     "id": 2
                                 },
                                 {
                                     "rule": "optional",
-                                    "type": "int32",
+                                    "type": "double",
                                     "name": "latitude",
                                     "id": 3
                                 },
                                 {
                                     "rule": "optional",
-                                    "type": "int32",
+                                    "type": "double",
                                     "name": "longitude",
                                     "id": 4
                                 }
@@ -4005,13 +4143,13 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                     "fields": [
                         {
                             "rule": "optional",
-                            "type": "ItemId",
+                            "type": "Item.ItemId",
                             "name": "itemId",
                             "id": 1
                         },
                         {
                             "rule": "optional",
-                            "type": "ItemType",
+                            "type": "Item.ItemType",
                             "name": "itemType",
                             "id": 2
                         },
@@ -4051,7 +4189,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                         },
                         {
                             "rule": "optional",
-                            "type": "ItemId",
+                            "type": "Item.ItemId",
                             "name": "itemId",
                             "id": 2
                         },
@@ -4099,29 +4237,6 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                     ]
                 },
                 {
-                    "name": "Item",
-                    "fields": [
-                        {
-                            "rule": "optional",
-                            "type": "ItemId",
-                            "name": "itemId",
-                            "id": 1
-                        },
-                        {
-                            "rule": "optional",
-                            "type": "int32",
-                            "name": "count",
-                            "id": 2
-                        },
-                        {
-                            "rule": "optional",
-                            "type": "bool",
-                            "name": "unseen",
-                            "id": 3
-                        }
-                    ]
-                },
-                {
                     "name": "PokemonFamily",
                     "fields": [
                         {
@@ -4143,7 +4258,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                     "fields": [
                         {
                             "rule": "optional",
-                            "type": "ItemId",
+                            "type": "Item.ItemId",
                             "name": "itemId",
                             "id": 1
                         },
@@ -4183,7 +4298,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                         },
                         {
                             "rule": "optional",
-                            "type": "Item",
+                            "type": "Item.ItemData",
                             "name": "item",
                             "id": 2
                         },
@@ -4284,206 +4399,237 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                     ]
                 },
                 {
-                    "name": "ItemAward",
-                    "fields": [
+                    "name": "Item",
+                    "fields": [],
+                    "messages": [
                         {
-                            "rule": "optional",
-                            "type": "ItemId",
-                            "name": "itemId",
-                            "id": 1
+                            "name": "ItemData",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "ItemId",
+                                    "name": "itemId",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "int32",
+                                    "name": "count",
+                                    "id": 2
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "bool",
+                                    "name": "unseen",
+                                    "id": 3
+                                }
+                            ]
                         },
                         {
-                            "rule": "optional",
-                            "type": "int32",
-                            "name": "itemCount",
-                            "id": 2
+                            "name": "ItemAward",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "ItemId",
+                                    "name": "itemId",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "int32",
+                                    "name": "itemCount",
+                                    "id": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "enums": [
+                        {
+                            "name": "ItemId",
+                            "values": [
+                                {
+                                    "name": "ITEM_UNKNOWN",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "ITEM_POKE_BALL",
+                                    "id": 1
+                                },
+                                {
+                                    "name": "ITEM_GREAT_BALL",
+                                    "id": 2
+                                },
+                                {
+                                    "name": "ITEM_ULTRA_BALL",
+                                    "id": 3
+                                },
+                                {
+                                    "name": "ITEM_MASTER_BALL",
+                                    "id": 4
+                                },
+                                {
+                                    "name": "ITEM_POTION",
+                                    "id": 101
+                                },
+                                {
+                                    "name": "ITEM_SUPER_POTION",
+                                    "id": 102
+                                },
+                                {
+                                    "name": "ITEM_HYPER_POTION",
+                                    "id": 103
+                                },
+                                {
+                                    "name": "ITEM_MAX_POTION",
+                                    "id": 104
+                                },
+                                {
+                                    "name": "ITEM_REVIVE",
+                                    "id": 201
+                                },
+                                {
+                                    "name": "ITEM_MAX_REVIVE",
+                                    "id": 202
+                                },
+                                {
+                                    "name": "ITEM_LUCKY_EGG",
+                                    "id": 301
+                                },
+                                {
+                                    "name": "ITEM_INCENSE_ORDINARY",
+                                    "id": 401
+                                },
+                                {
+                                    "name": "ITEM_INCENSE_SPICY",
+                                    "id": 402
+                                },
+                                {
+                                    "name": "ITEM_INCENSE_COOL",
+                                    "id": 403
+                                },
+                                {
+                                    "name": "ITEM_INCENSE_FLORAL",
+                                    "id": 404
+                                },
+                                {
+                                    "name": "ITEM_TROY_DISK",
+                                    "id": 501
+                                },
+                                {
+                                    "name": "ITEM_X_ATTACK",
+                                    "id": 602
+                                },
+                                {
+                                    "name": "ITEM_X_DEFENSE",
+                                    "id": 603
+                                },
+                                {
+                                    "name": "ITEM_X_MIRACLE",
+                                    "id": 604
+                                },
+                                {
+                                    "name": "ITEM_RAZZ_BERRY",
+                                    "id": 701
+                                },
+                                {
+                                    "name": "ITEM_BLUK_BERRY",
+                                    "id": 702
+                                },
+                                {
+                                    "name": "ITEM_NANAB_BERRY",
+                                    "id": 703
+                                },
+                                {
+                                    "name": "ITEM_WEPAR_BERRY",
+                                    "id": 704
+                                },
+                                {
+                                    "name": "ITEM_PINAP_BERRY",
+                                    "id": 705
+                                },
+                                {
+                                    "name": "ITEM_SPECIAL_CAMERA",
+                                    "id": 801
+                                },
+                                {
+                                    "name": "ITEM_INCUBATOR_BASIC_UNLIMITED",
+                                    "id": 901
+                                },
+                                {
+                                    "name": "ITEM_INCUBATOR_BASIC",
+                                    "id": 902
+                                },
+                                {
+                                    "name": "ITEM_POKEMON_STORAGE_UPGRADE",
+                                    "id": 1001
+                                },
+                                {
+                                    "name": "ITEM_ITEM_STORAGE_UPGRADE",
+                                    "id": 1002
+                                }
+                            ]
+                        },
+                        {
+                            "name": "ItemType",
+                            "values": [
+                                {
+                                    "name": "ITEM_TYPE_NONE",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "ITEM_TYPE_POKEBALL",
+                                    "id": 1
+                                },
+                                {
+                                    "name": "ITEM_TYPE_POTION",
+                                    "id": 2
+                                },
+                                {
+                                    "name": "ITEM_TYPE_REVIVE",
+                                    "id": 3
+                                },
+                                {
+                                    "name": "ITEM_TYPE_MAP",
+                                    "id": 4
+                                },
+                                {
+                                    "name": "ITEM_TYPE_BATTLE",
+                                    "id": 5
+                                },
+                                {
+                                    "name": "ITEM_TYPE_FOOD",
+                                    "id": 6
+                                },
+                                {
+                                    "name": "ITEM_TYPE_CAMERA",
+                                    "id": 7
+                                },
+                                {
+                                    "name": "ITEM_TYPE_DISK",
+                                    "id": 8
+                                },
+                                {
+                                    "name": "ITEM_TYPE_INCUBATOR",
+                                    "id": 9
+                                },
+                                {
+                                    "name": "ITEM_TYPE_INCENSE",
+                                    "id": 10
+                                },
+                                {
+                                    "name": "ITEM_TYPE_XP_BOOST",
+                                    "id": 11
+                                },
+                                {
+                                    "name": "ITEM_TYPE_INVENTORY_UPGRADE",
+                                    "id": 12
+                                }
+                            ]
                         }
                     ]
                 }
             ],
             "enums": [
-                {
-                    "name": "ItemId",
-                    "values": [
-                        {
-                            "name": "ITEM_UNKNOWN",
-                            "id": 0
-                        },
-                        {
-                            "name": "ITEM_POKE_BALL",
-                            "id": 1
-                        },
-                        {
-                            "name": "ITEM_GREAT_BALL",
-                            "id": 2
-                        },
-                        {
-                            "name": "ITEM_ULTRA_BALL",
-                            "id": 3
-                        },
-                        {
-                            "name": "ITEM_MASTER_BALL",
-                            "id": 4
-                        },
-                        {
-                            "name": "ITEM_POTION",
-                            "id": 101
-                        },
-                        {
-                            "name": "ITEM_SUPER_POTION",
-                            "id": 102
-                        },
-                        {
-                            "name": "ITEM_HYPER_POTION",
-                            "id": 103
-                        },
-                        {
-                            "name": "ITEM_MAX_POTION",
-                            "id": 104
-                        },
-                        {
-                            "name": "ITEM_REVIVE",
-                            "id": 201
-                        },
-                        {
-                            "name": "ITEM_MAX_REVIVE",
-                            "id": 202
-                        },
-                        {
-                            "name": "ITEM_LUCKY_EGG",
-                            "id": 301
-                        },
-                        {
-                            "name": "ITEM_INCENSE_ORDINARY",
-                            "id": 401
-                        },
-                        {
-                            "name": "ITEM_INCENSE_SPICY",
-                            "id": 402
-                        },
-                        {
-                            "name": "ITEM_INCENSE_COOL",
-                            "id": 403
-                        },
-                        {
-                            "name": "ITEM_INCENSE_FLORAL",
-                            "id": 404
-                        },
-                        {
-                            "name": "ITEM_TROY_DISK",
-                            "id": 501
-                        },
-                        {
-                            "name": "ITEM_X_ATTACK",
-                            "id": 602
-                        },
-                        {
-                            "name": "ITEM_X_DEFENSE",
-                            "id": 603
-                        },
-                        {
-                            "name": "ITEM_X_MIRACLE",
-                            "id": 604
-                        },
-                        {
-                            "name": "ITEM_RAZZ_BERRY",
-                            "id": 701
-                        },
-                        {
-                            "name": "ITEM_BLUK_BERRY",
-                            "id": 702
-                        },
-                        {
-                            "name": "ITEM_NANAB_BERRY",
-                            "id": 703
-                        },
-                        {
-                            "name": "ITEM_WEPAR_BERRY",
-                            "id": 704
-                        },
-                        {
-                            "name": "ITEM_PINAP_BERRY",
-                            "id": 705
-                        },
-                        {
-                            "name": "ITEM_SPECIAL_CAMERA",
-                            "id": 801
-                        },
-                        {
-                            "name": "ITEM_INCUBATOR_BASIC_UNLIMITED",
-                            "id": 901
-                        },
-                        {
-                            "name": "ITEM_INCUBATOR_BASIC",
-                            "id": 902
-                        },
-                        {
-                            "name": "ITEM_POKEMON_STORAGE_UPGRADE",
-                            "id": 1001
-                        },
-                        {
-                            "name": "ITEM_ITEM_STORAGE_UPGRADE",
-                            "id": 1002
-                        }
-                    ]
-                },
-                {
-                    "name": "ItemType",
-                    "values": [
-                        {
-                            "name": "ITEM_TYPE_NONE",
-                            "id": 0
-                        },
-                        {
-                            "name": "ITEM_TYPE_POKEBALL",
-                            "id": 1
-                        },
-                        {
-                            "name": "ITEM_TYPE_POTION",
-                            "id": 2
-                        },
-                        {
-                            "name": "ITEM_TYPE_REVIVE",
-                            "id": 3
-                        },
-                        {
-                            "name": "ITEM_TYPE_MAP",
-                            "id": 4
-                        },
-                        {
-                            "name": "ITEM_TYPE_BATTLE",
-                            "id": 5
-                        },
-                        {
-                            "name": "ITEM_TYPE_FOOD",
-                            "id": 6
-                        },
-                        {
-                            "name": "ITEM_TYPE_CAMERA",
-                            "id": 7
-                        },
-                        {
-                            "name": "ITEM_TYPE_DISK",
-                            "id": 8
-                        },
-                        {
-                            "name": "ITEM_TYPE_INCUBATOR",
-                            "id": 9
-                        },
-                        {
-                            "name": "ITEM_TYPE_INCENSE",
-                            "id": 10
-                        },
-                        {
-                            "name": "ITEM_TYPE_XP_BOOST",
-                            "id": 11
-                        },
-                        {
-                            "name": "ITEM_TYPE_INVENTORY_UPGRADE",
-                            "id": 12
-                        }
-                    ]
-                },
                 {
                     "name": "EggIncubatorType",
                     "values": [
@@ -4814,7 +4960,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "Inventory.ItemId",
+                                            "type": "Inventory.Item.ItemId",
                                             "name": "modifierType",
                                             "id": 1
                                         },
@@ -4890,7 +5036,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                         },
                                         {
                                             "rule": "optional",
-                                            "type": "int32",
+                                            "type": "Inventory.Item.ItemId",
                                             "name": "pokeball",
                                             "id": 2
                                         },
@@ -4903,7 +5049,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                         {
                                             "rule": "optional",
                                             "type": "string",
-                                            "name": "spawnPointGuid",
+                                            "name": "spawnPointId",
                                             "id": 4
                                         },
                                         {
@@ -5450,7 +5596,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "uint64",
+                                            "type": "fixed64",
                                             "name": "pokemonId",
                                             "id": 1
                                         },
@@ -5484,7 +5630,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "Inventory.ItemId",
+                                            "type": "Inventory.Item.ItemId",
                                             "name": "itemId",
                                             "id": 1
                                         },
@@ -5558,6 +5704,10 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     ]
                                 },
                                 {
+                                    "name": "SfidaActionLogMessage",
+                                    "fields": []
+                                },
+                                {
                                     "name": "StartGymBattleMessage",
                                     "fields": [
                                         {
@@ -5608,7 +5758,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "Inventory.ItemId",
+                                            "type": "Inventory.Item.ItemId",
                                             "name": "incenseType",
                                             "id": 1
                                         }
@@ -5619,7 +5769,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "Inventory.ItemId",
+                                            "type": "Inventory.Item.ItemId",
                                             "name": "itemId",
                                             "id": 1
                                         },
@@ -5659,7 +5809,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "Inventory.ItemId",
+                                            "type": "Inventory.Item.ItemId",
                                             "name": "itemId",
                                             "id": 1
                                         },
@@ -5688,7 +5838,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "Inventory.ItemId",
+                                            "type": "Inventory.Item.ItemId",
                                             "name": "itemId",
                                             "id": 1
                                         },
@@ -5705,7 +5855,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "Inventory.ItemId",
+                                            "type": "Inventory.Item.ItemId",
                                             "name": "itemId",
                                             "id": 1
                                         },
@@ -5722,7 +5872,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                     "fields": [
                                         {
                                             "rule": "optional",
-                                            "type": "Inventory.ItemId",
+                                            "type": "Inventory.Item.ItemId",
                                             "name": "itemId",
                                             "id": 1
                                         }
@@ -6106,7 +6256,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                 },
                                 {
                                     "rule": "optional",
-                                    "type": "uint64",
+                                    "type": "fixed64",
                                     "name": "capturedPokemonId",
                                     "id": 3
                                 },
@@ -7063,7 +7213,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                 },
                                 {
                                     "rule": "repeated",
-                                    "type": "Inventory.ItemAward",
+                                    "type": "Inventory.Item.ItemAward",
                                     "name": "itemsAwarded",
                                     "id": 2
                                 },
@@ -7475,13 +7625,13 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                 },
                                 {
                                     "rule": "repeated",
-                                    "type": "Inventory.ItemAward",
+                                    "type": "Inventory.Item.ItemAward",
                                     "name": "itemsAwarded",
                                     "id": 2
                                 },
                                 {
                                     "rule": "repeated",
-                                    "type": "Inventory.ItemId",
+                                    "type": "Inventory.Item.ItemId",
                                     "name": "itemsUnlocked",
                                     "id": 4
                                 }
@@ -7813,6 +7963,38 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                         {
                                             "name": "FAILURE",
                                             "id": 3
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "SfidaActionLogResponse",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "Result",
+                                    "name": "result",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "repeated",
+                                    "type": "Data.Logs.ActionLogEntry",
+                                    "name": "logEntries",
+                                    "id": 2
+                                }
+                            ],
+                            "enums": [
+                                {
+                                    "name": "Result",
+                                    "values": [
+                                        {
+                                            "name": "UNSET",
+                                            "id": 0
+                                        },
+                                        {
+                                            "name": "SUCCESS",
+                                            "id": 1
                                         }
                                     ]
                                 }
@@ -8496,13 +8678,13 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                             "fields": [
                                 {
                                     "rule": "optional",
-                                    "type": "Inventory.ItemId",
+                                    "type": "Inventory.Item.ItemId",
                                     "name": "itemId",
                                     "id": 1
                                 },
                                 {
                                     "rule": "optional",
-                                    "type": "Inventory.ItemType",
+                                    "type": "Inventory.Item.ItemType",
                                     "name": "itemType",
                                     "id": 2
                                 },
@@ -8781,8 +8963,8 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                 },
                                 {
                                     "rule": "optional",
-                                    "type": "Enums.PokemonClass",
-                                    "name": "class",
+                                    "type": "Enums.PokemonRarity",
+                                    "name": "rarity",
                                     "id": 14
                                 },
                                 {
@@ -9175,7 +9357,7 @@ module.exports = require("protobufjs").newBuilder({})['import']({
                                 },
                                 {
                                     "rule": "repeated",
-                                    "type": "Inventory.ItemId",
+                                    "type": "Inventory.Item.ItemId",
                                     "name": "itemIds",
                                     "id": 4
                                 },
